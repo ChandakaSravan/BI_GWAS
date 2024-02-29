@@ -1,0 +1,215 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\usepackage[normalem]{ulem}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\begin{center}
+
+\hypertarget{cse-5370-bio-informatics}{%
+\section{\texorpdfstring{\textbf{\uline{CSE 5370:
+BIO-INFORMATICS}}}{CSE 5370: BIO-INFORMATICS}}\label{cse-5370-bio-informatics}}
+
+\hypertarget{homework---1}{%
+\section{\texorpdfstring{\textbf{\uline{HOMEWORK -
+1}}}{HOMEWORK - 1}}\label{homework---1}}
+
+
+\hypertarget{homework---1}{%
+\section{\texorpdfstring{\textbf{\uline{Genome Wide Association Study (GWAS)}}}{Genome Wide Association Study (GWAS)}}\label{GWAS---1}}
+\end{center}
+\
+
+\hypertarget{generating-your-own-unique-data}{%
+\subsection{\texorpdfstring{\textbf{Generating Your Own Unique
+Data}}{Generating Your Own Unique Data}}\label{generating-your-own-unique-data}}
+
+Ran the "datasetGenerator.py" script with my UTA ID and generated the
+1002059166.csv file as shown below.~
+
+\includegraphics[width=6.26806in,height=0.42014in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image1.png}
+
+\includegraphics[width=6.25833in,height=1.53333in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image2.png}
+
+The Above 1002059166.csv has 1000 rows and 5 columns, which is randomly
+generated according to the script.
+
+\includegraphics[width=4.5in,height=2.75833in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image3.png}
+
+\hypertarget{fishers-exact-test}{%
+\subsection{\texorpdfstring{\textbf{Fisher's Exact
+Test}}{Fisher's Exact Test}}\label{fishers-exact-test}}
+
+Imported the required libraries: pandas for data handling, fisher\_exact
+from scipy.stats for calculating p-values, numpy for numerical
+computation, and matplotlib.pyplot for plotting.
+
+Fisher\textquotesingle s Exact Test is a statistical test that
+determines whether the observed frequencies of a categorical variable in
+a contingency table differ significantly from expected frequencies based
+on a null hypothesis. The test is used to determine the association
+between two categorical variables and to calculate the odds ratio, which
+is a measure of the strength of association between the variables. The
+test is commonly used in genetic association studies to assess the
+association between a genetic variant (SNP) and a disease outcome.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  The null hypothesis of the fisher\_exact function assumes that there
+  is no association between the presence of a SNP and the likelihood of
+  developing a complex trait. In other words, the odds of having the
+  complex trait in individuals with the C-allele is equal to the odds of
+  having the complex trait in individuals with the T-allele. The purpose
+  of the Fisher\textquotesingle s exact test is to determine if the data
+  provides evidence to reject the null hypothesis. 
+\item
+  The "alternative" argument in the fisher\_exact function determines
+  the alternative hypothesis being tested. By default value of
+  "two-sided" is being used. In a two-sided test, the null hypothesis is
+  tested against the alternative that the odds ratio is not equal to 1
+  (i.e. the proportions of C-allele and T-allele are not equal between
+  the case and control groups) and odds ratio for Allele C is 0.102079 as shown below. So choose two-sided.
+\item
+
+  Printing the SNP name, P-value, Significance in the first 3 columns of
+  the results.csv file. Stored the results in a new dataframe results,
+  which includes columns for the SNP name, the calculated p-value, and a
+  Boolean variable indicating whether the SNP is significant under the
+  original p-value threshold (p-value \textless{} 5e-8).
+\item
+  And printing the number of significant SNPs as 343(means P-value less
+  than 5e-8).
+\end{enumerate}
+
+\includegraphics[width=5.26667in,height=1.88333in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image9.png}
+\includegraphics[width=6.26667in,height=2.88333in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image4.png}
+
+\hypertarget{section}{%
+\subsection{}\label{section}}
+
+\hypertarget{corrected-p-values}{%
+\subsection{\texorpdfstring{\textbf{Corrected
+P-Values}}{Corrected P-Values}}\label{corrected-p-values}}
+
+Calculating the Bonferroni-corrected p-value by dividing the original
+p-value threshold (5e-8) by the number of SNPs.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Bonferroni-Corrected P-value is 4.999e-11
+\item
+  Printing the Corrected Significant P-value, Number of significant SNPs
+  under the corrected p-value: 237. The number of significant SNPs (237)
+  under the corrected p-value does not allow us to definitively conclude
+  whether any of the C-allele SNPs contribute to a
+  person\textquotesingle s risk of developing the complex trait. Further
+  analysis, such as evaluating the effect size and functional
+  significance of the SNPs, is needed to establish a causal relationship
+  between the SNPs and the complex trait. Additionally, replication of
+  the findings in independent studies is important to validate the
+  results and increase confidence in the conclusions.
+\item
+  Printing the Significant\_Corrected P-value in the 4rth column of
+  results.csv file.
+\end{enumerate}
+
+\includegraphics[width=5.05877in,height=3.43363in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image5.png}
+
+\includegraphics[width=5.06667in,height=3.05in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image6.png}
+
+\hypertarget{manhattan-plots}{%
+\subsection{\texorpdfstring{\textbf{Manhattan
+Plots}}{Manhattan Plots}}\label{manhattan-plots}}
+
+Manhattan plot, which is a graphical representation of the association
+between a complex trait and SNPs along a chromosome. The x-axis
+represents the SNP locus and the y-axis represents the negative
+logarithm of the P-value, which is a measure of the statistical
+significance of the association between the SNP and the trait.
+
+The scatter plot shows the -log10(P-value) for each SNP, with higher
+values indicating more significant associations. The red line represents
+the original P-value threshold of 5e-8, while the green line represents
+the corrected P-value threshold obtained through the Bonferroni
+correction.
+
+SNPs with -log10(P-value) values greater than the corrected threshold
+are considered statistically significant, meaning they are likely to
+contribute to the risk of developing the complex trait.
+
+\includegraphics[width=5.93333in,height=4.475in]{C:/Users/chand/Desktop/UTA-SEM/MS-SEM2/BIO-INFORMATICS/image7.png}
+
+\hypertarget{difficulty-adjustment}{%
+\subsection{\texorpdfstring{\textbf{Difficulty
+Adjustment}}{Difficulty Adjustment}}\label{difficulty-adjustment}}
+
+In total assignment took around 7 hours to complete, initially to
+understand the concept took some time. But after getting a clear
+understanding on concept, coding didn't took much time.
+
+Initially bit confused about Bonferroni Corrected P- values.
+
+\end{document}
